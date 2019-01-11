@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PaymentGateway.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -22,6 +23,9 @@ int main(int argc, const char * argv[]) {
 //        if([inputString rangeOfCharacterFromSet:NSCharacterSet.decimalDigitCharacterSet.invertedSet ].location == NSNotFound)
         
         int inputNumber = [inputString intValue];
+        
+        PaymentGateway* paymentGateway = [[PaymentGateway alloc] init];
+        [paymentGateway processPaymentAmount:inputNumber];
         NSLog(@"Your input is: %i", inputNumber);
         
     }
