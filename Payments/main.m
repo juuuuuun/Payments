@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "PaymentGateway.h"
+#import "PaypalPaymentService.h"
+#import "StripePaymentService.h"
+#import "AmazonPaymentService.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -25,8 +28,23 @@ int main(int argc, const char * argv[]) {
         int inputNumber = [inputString intValue];
         
         PaymentGateway* paymentGateway = [[PaymentGateway alloc] init];
-        [paymentGateway processPaymentAmount:inputNumber];
         NSLog(@"Your input is: %i", inputNumber);
+        
+        PaypalPaymentService* paypal = [[PaypalPaymentService alloc] init];
+        StripePaymentService* stripe = [[StripePaymentService alloc] init];
+        AmazonPaymentService* amazon = [[AmazonPaymentService alloc] init];
+        switch(inputNumber) {
+            case 1:
+                paymentGateway.paymentDelegate = paypal;
+                break;
+            case 2:
+                paymentGateway.paymentDelegate = stripe;
+                break;
+            case 3:
+                paymentGateway.paymentDelegate = amazon;
+                break;
+        }
+        [paymentGateway processPaymentAmount:inputNumber];
         
     }
     return 0;

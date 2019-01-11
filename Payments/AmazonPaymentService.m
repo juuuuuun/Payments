@@ -10,4 +10,7 @@
 
 @implementation AmazonPaymentService
 
+- (void)processPaymentAmount:(NSInteger)amount {
+    NSLog(@"Amazon used");
+}
 @end
